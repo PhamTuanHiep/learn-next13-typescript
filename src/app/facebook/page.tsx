@@ -10,9 +10,10 @@ const FaceBook =()=>{
     }
     return (
         <>
-        <Button variant='primary'>Hoi dan IT</Button>
-        <div>Wellcom to FaceBook. Nice to meet you !</div>
-        <button onClick={handleBtn}>Back Home</button>
+            <Button variant='primary'>Hoi dan IT</Button>
+            <div>Wellcom to FaceBook. Nice to meet you !</div>
+            <button onClick={handleBtn}>Back Home</button>
+        
         </>
     )
 }
