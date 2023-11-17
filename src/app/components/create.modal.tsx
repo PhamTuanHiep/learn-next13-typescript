@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { toast } from 'react-toastify';
 
 interface IProps{
     showModalCreate: boolean,
@@ -15,7 +16,32 @@ function CreateModal(props: IProps) {
     const [content,setContent] =useState<string>('')
 
     const handleSubmit=()=>{
-        console.log('check data:',title, author, content)
+      if(!title){
+        toast.error("Not em pty title!")
+      }
+      if(!author){
+        toast.error("Not em pty author!")
+      }
+      if(!content){
+        toast.error("Not em pty content!")
+      }
+
+      fetch('http://localhost:8000/blogs', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, text/plain, */*', 
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({title, author, content})
+        })
+        .then(res=>  res.json())
+        .then(res => {
+          if(res){
+            toast.success("Create new blog succeed")
+            handleCloseModal()
+          }
+        })        
+
     }
     const handleCloseModal=()=>{
         setTitle('')
