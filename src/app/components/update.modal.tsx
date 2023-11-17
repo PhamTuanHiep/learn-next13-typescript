@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -7,14 +7,28 @@ import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 
 interface IProps{
-    showModalCreate: boolean,
-    setShowModalCreate:(value: boolean)=> void
+    blog: IBlog | null,
+    setBlog:(value: IBlog | null)=> void,
+    showModalUpdate: boolean,
+    setShowModalUpdate:(value: boolean)=> void
 }
-function CreateModal(props: IProps) {
-    const {showModalCreate,setShowModalCreate} = props
+function UpdateModal(props: IProps) {
+    const {blog,setBlog,showModalUpdate,setShowModalUpdate} = props
+    const [id, setId]= useState<number>(0)
     const [title,setTitle] =useState<string>('')
     const [author,setAuthor] =useState<string>('')
     const [content,setContent] =useState<string>('')
+
+    useEffect(()=>{
+        if(blog && blog.id){
+            setId(blog.id)
+            setTitle(blog.title)
+            setAuthor(blog.author)
+            setContent(blog.content)
+
+        }
+
+    },[blog])
 
     const handleSubmit=()=>{
       if(!title){
@@ -27,22 +41,22 @@ function CreateModal(props: IProps) {
         toast.error("Not em pty content!")
       }
       else{
-        fetch('http://localhost:8000/blogs', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json, text/plain, */*', 
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({title, author, content})
-          })
-          .then(res=>  res.json())
-          .then(res => {
-            if(res){
-              toast.success("Create new blog succeed")
-              handleCloseModal()
-              mutate("http://localhost:8000/blogs")
-            }
-          })        
+          fetch(`http://localhost:8000/blogs/${id}`, {
+              method: 'PUT',
+              headers: {
+                'Accept': 'application/json, text/plain, */*', 
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({title, author, content})
+            })
+            .then(res=>  res.json())
+            .then(res => {
+              if(res){
+                toast.success("Update new blog succeed")
+                handleCloseModal()
+                mutate("http://localhost:8000/blogs")
+              }
+            })        
 
       }
 
@@ -51,18 +65,19 @@ function CreateModal(props: IProps) {
         setTitle('')
         setAuthor('')
         setContent('')
-        setShowModalCreate(false)
+        setBlog(null)
+        setShowModalUpdate(false)
     }
   return (
     <>
 
-      <Modal show={showModalCreate} 
+      <Modal show={showModalUpdate} 
       onHide={()=>handleCloseModal()}
       backdrop='static'
       keyboard={false}
       size='lg'>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Modal Update</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
@@ -99,4 +114,4 @@ function CreateModal(props: IProps) {
   );
 }
 
-export default CreateModal;
+export default UpdateModal;
