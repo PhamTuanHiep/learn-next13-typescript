@@ -20,15 +20,11 @@ export default function Home() {
     }
     );
 
-  console.log(">>> res:",data)
-  // useEffect(()=>{
-  //   const fetchData= async()=>{
-  //     const res = await fetch('http://localhost:8000/blogs')
-  //     const data= await res.json()
-  //     console.log(">>> res:",data)
-  //   }
-  //   fetchData()
-  // },[]) 
+  // console.log(">>> res:",data)
+
+  if(!data){
+    return <div> loading.....</div>
+  }
   return (
     <main >
      <div>
@@ -40,7 +36,7 @@ export default function Home() {
         <li><Link href={'/tiktok'}>TikTok</Link></li>
         <li><Link href='/youtube'>Youtube</Link></li>
       </ul>
-      <AppTable/>
+      <AppTable blogs={data}/>
      </div>
     </main>
   )
