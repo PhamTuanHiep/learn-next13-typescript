@@ -43,7 +43,7 @@ function AppTable(props: IProps) {
                 <td>{item.title}</td>
                 <td>{item.author}</td>
                 <td>
-                  <Button>View</Button>
+                  <Button href={`/blogs/${item.id}`}>View</Button>
                   <Button variant='warning' className='mx-3'
                   onClick={()=>{
                     setBlog(item)
