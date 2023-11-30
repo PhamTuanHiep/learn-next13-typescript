@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 import CreateModal from './create.modal';
 import { useState } from 'react';
 import UpdateModal from './update.modal';
+import { toast } from 'react-toastify';
+import { mutate } from 'swr';
 
 interface IProps{
   blogs: IBlog[]
@@ -13,8 +15,26 @@ function AppTable(props: IProps) {
   const [blog, setBlog]=useState<IBlog | null>(null)
   const [showModalCreate,setShowModalCreate]=useState<boolean>(false)
   const [showModalUpdate,setShowModalUpdate]=useState<boolean>(false)
-
-  console.log("blogs:",blogs)
+  
+  const handleDeleteBlog=(id:number)=>{
+    let text = `Do you want to detele this blog (id=${id}) !`;
+    if (confirm(text) == true) {
+      fetch(`http://localhost:8000/blogs/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*', 
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(res=>  res.json())
+    .then(res => {
+      if(res){
+        toast.success("Delete new blog succeed")
+        mutate('http://localhost:8000/blogs')
+      }
+    })   
+    }  
+  }
   return (
     <>
     <div
@@ -50,7 +70,7 @@ function AppTable(props: IProps) {
                     setShowModalUpdate(true)
                     
                   }}>Edit</Button>
-                  <Button variant='danger'>Delete</Button>
+                  <Button variant='danger' onClick={()=>handleDeleteBlog(item.id)}>Delete</Button>
                 </td>
               </tr>
             )
