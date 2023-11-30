@@ -24,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppHeader/>
-        <Container>
+        <Container
+        // style={{height:'calc(100vh-82px)'}}
+        // fluid
+        >
           {children}
         </Container>
         <AppFooter/>
