@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata, ResolvingMetadata} from 'next'
  
 type Props = {
   params: { id: string }

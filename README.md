@@ -1,13 +1,18 @@
 ## Các bước cần làm sau khi clone source code:
-### 1. Cài đặt thư viện: npm i
-### 2. Chạy project: npm run dev   
 
+1. Cài đặt thư viện: npm i
+2. Chạy project: npm run dev
 
 &nbsp;
-## Về tác giả: 
-### - Author Hỏi Dân IT :  https://www.youtube.com/@hoidanit
+
+## Về tác giả:
+
+### - Author Hỏi Dân IT : https://www.youtube.com/@hoidanit
+
 &nbsp;
-### - Xem full series  Tự Học Next.JS Cơ Bản (với React và TypeScript) tại đây: https://www.youtube.com/playlist?list=PLncHg6Kn2JT6zw4JiFOE1z90ghnyrFl5B
+
+### - Xem full series Tự Học Next.JS Cơ Bản (với React và TypeScript) tại đây: https://www.youtube.com/playlist?list=PLncHg6Kn2JT6zw4JiFOE1z90ghnyrFl5B
+
 &nbsp;
 &nbsp;
 &nbsp;
@@ -46,5 +51,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
 # Learn-nextJs13-ver1
+
 # Learn-nextJs13-ver1

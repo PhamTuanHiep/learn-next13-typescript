@@ -3,7 +3,7 @@ import Link from 'next/link'
 import style1 from '@/app/styles/app.module.css'
 import style2 from '@/app/styles/hoidanit.module.css'
 import { Metadata } from 'next'
-
+ 
 // Static metadata
 export const metadata: Metadata={
   title:'HomePage',
